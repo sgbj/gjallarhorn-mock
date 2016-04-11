@@ -1,0 +1,19 @@
+{
+  "name": "gjallarhorn-mock",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skalds/gjallarhorn-mock.git"
+  },
+  "author": "skalds",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/skalds/gjallarhorn-mock/issues"
+  },
+  "homepage": "https://github.com/skalds/gjallarhorn-mock#readme"
+}
