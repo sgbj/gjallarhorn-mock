@@ -15,5 +15,13 @@
   "bugs": {
     "url": "https://github.com/skalds/gjallarhorn-mock/issues"
   },
-  "homepage": "https://github.com/skalds/gjallarhorn-mock#readme"
+  "homepage": "https://github.com/skalds/gjallarhorn-mock#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^2.2.0"
+  },
+  "dependencies": {
+    "jquery": "^2.2.3",
+    "materialize-css": "^0.97.6"
+  }
 }
