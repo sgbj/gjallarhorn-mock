@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "jquery": "^2.2.3",
-    "materialize-css": "^0.97.6"
+    "materialize-css": "^0.97.6",
+    "plotly.js": "^1.8.0"
   }
 }
