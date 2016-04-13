@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gjallarhorn</title>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="lib/css/materialize.css" rel="stylesheet" media="screen,projection">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      /* Responsive plots */
+      .col2 {
+        max-width: 100%;
+      }
+      .responsive-plot {
+        width: 100%;
+      }
+
+      /* Counter */
+      .counter-value {
+        font-size: 4rem;
+        line-height: 1;
+        display: block;
+        text-align: center;
+      }
+
+      /* Editor */
+      .editor-container {
+        position: relative;
+      }
+      .editor {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+
+      /* Cards */
+      .card-accent-lighter {
+        color: rgba(255, 255, 255, 0.4);
+        margin-top: 5px;
+        z-index: 1000;
+        position: absolute;
+        right: 0;
+      }
+      .card-accent-darker {
+        color: rgba(0, 0, 0, 0.4);
+        margin-top: 5px;
+        z-index: 1000;
+        position: absolute;
+        right: 0;
+      }
+
+      /* Profile */
+      .heading {
+        margin-top: 20px;
+        margin-bottom: 2px;
+        overflow: auto;
+      }
+
+      /* Heading */
+      h1 {
+        text-transform: uppercase;
+        font-weight: 200;
+        font-size: 2rem;
+        margin-top: 20px;
+      }
+
+      .left-side {
+        float: left;
+        width: 20%;
+        height: 100vh;
+      }
+      .right-side {
+        float: left;
+        width: 80%;
+      }
+      .right-side-container {
+        padding: 0 2%;
+      }
+    </style>
+</head>
+
+<body>
+<div class="left-side grey lighten-3">
+</div>
+  <div class="right-side">
+      <div class="right-side-container">
+
+      <div class="row">
+
+        <div class="col s12">
+          <div class="heading">
+            <h1 class="grey-text text-darken-3 left">Gjallarhorn</h1>
+            <a class="waves-effect waves btn-flat btn-large disabled right">
+              <span class="grey-text text-darken-3">OSCN\Username</span> <i class="material-icons right">keyboard_arrow_down</i>
+            </a>
+          </div>
+        </div>
+
+        <div class="col s12 m6 l3">
+          <div class="card deep-purple darken-1" style="height: 163px;">
+            <i class="material-icons right card-accent-lighter">more_vert</i>
+            <div class="card-image">
+              <div id="cpu-usage-plot" class="responsive-plot" style="height: 100px;"></div>
+            </div>
+            <div class="card-action deep-purple darken-2 white-text center-align">
+              CPU usage
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m6 l3">
+          <div class="card blue lighten-2" style="height: 163px;">
+            <i class="material-icons right card-accent-lighter">more_vert</i>
+            <div class="card-content white-text">
+              <span id="transfer-rate" class="counter-value">0.2</span>
+            </div>
+            <div class="card-action blue lighten-1 white-text center-align">
+              MB/s
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m6 l3">
+          <div class="card teal accent-4" style="height: 163px;">
+            <i class="material-icons right card-accent-darker">more_vert</i>
+            <div class="card-image">
+              <div id="success-plot" class="responsive-plot" style="height: 100px;"></div>
+            </div>
+            <div class="card-action teal center-align white-text">
+              Success rate
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m6 l3">
+          <div class="card red darken-1" style="height: 163px;">
+            <i class="material-icons right card-accent-lighter">more_vert</i>
+            <div class="card-content white-text">
+              <span class="counter-value">2</span>
+            </div>
+            <div class="card-action red darken-2 white-text center-align">
+              Errors
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 l6">
+          <div class="card">
+            <i class="material-icons right card-accent-darker">more_vert</i>
+            <div class="card-action grey lighten-2">
+              <span class="card-title grey-text text-darken-3">Task history</span>
+            </div>
+            <div class="card-content" style="padding-top: 0; padding-bottom: 0;">
+              <table class="bordered responsive-table">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Task</th>
+                    <th class="right-align">Last run</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td class="blue-text">aQxRhk</td><td>Task 1</td><td class="right-align blue-text">32 minutes ago</td></tr>
+                  <tr><td class="blue-text">zfgLmS</td><td>Task 2</td><td class="right-align blue-text">5 hours ago</td></tr>
+                  <tr><td class="blue-text">bVcXzn</td><td>Task 3</td><td class="right-align blue-text">16 hours ago</td></tr>
+                  <tr style="border-bottom: 0;"><td class="blue-text">UyeRMS</td><td>Task 4</td><td class="right-align blue-text">yesterday</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="card-action grey lighten-2">
+              <a href="" class="grey-text text-darken-1">View all</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 l6">
+          <div class="card">
+            <i class="material-icons right card-accent-darker">more_vert</i>
+            <div class="card-action grey lighten-2">
+              <span class="card-title grey-text text-darken-3">Latest logs</span>
+            </div>
+              <div class="editor-container" style="height: 263px;">
+<div id="log" class="editor">4/12/2016 3:27:12 PM > Starting "Task 1"
+4/12/2016 3:27:21 PM > Starting step "Query"
+4/12/2016 3:28:11 PM > Results:
+  [
+    {
+      CaseNumber: "TR-2016-1",
+      Style: "Smith v State of Oklahoma"
+    },
+    {
+      CaseNumber: "TR-2016-2",
+      Style: "Jackson v State of Oklahoma"
+    }
+  ]
+4/12/2016 3:29:87 PM > Starting step "FTP - Upload"
+4/12/2016 3:30:76 PM > Success
+4/12/2016 3:31:14 PM > "Task 1" completed in 4.2 seconds</div>
+
+            </div>
+
+            <div class="card-action grey lighten-2">
+              <a href="" class="grey-text text-darken-1">View all</a>
+            </div>
+          </div>
+        </div>
+
+
+
+
+      </div>
+    </div>
+
+
+
+
+
+      <footer class="page-footer blue lighten-1">
+                <div class="container">
+                  <div class="row">
+                    <div class="col l6 s12">
+                      <h5 class="white-text">Footer Content</h5>
+                      <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                    </div>
+                    <div class="col l4 offset-l2 s12">
+                      <h5 class="white-text">Links</h5>
+                      <ul>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="footer-copyright">
+                  <div class="container">
+                  © 2014 Copyright Text
+                  <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+                  </div>
+                </div>
+              </footer>
+
+
+
+
+
+
+
+
+</div>
+
+
+
+    <script src="lib/jquery.js"></script>
+    <script src="lib/js/materialize.js"></script>
+    <script src="lib/plotly.js"></script>
+    <script src="lib/ace.js"></script>
+    <script>
+      // Console
+      var log = ace.edit("log");
+      log.renderer.setScrollMargin(10, 10);
+      log.renderer.setShowGutter(false);
+      log.setReadOnly(true);
+      log.setTheme("ace/theme/ambiance");
+      log.getSession().setMode("ace/mode/batchfile");
+
+      window.addEventListener('resize', function() {
+        var elements = document.getElementsByClassName('responsive-plot');
+        for (var i = 0; i < elements.length; i++) {
+          Plotly.Plots.resize(elements[i]);
+        }
+      });
+
+      var successPlot = document.getElementById('success-plot');
+      Plotly.plot(successPlot, [{
+        values: [91, 9],
+        labels: ['Success', 'Fail'],
+        textinfo: 'none',
+        text: [],
+        domain: {
+          x: [0, 1]
+        },
+        hole: .85,
+        hoverinfo: 'none',
+        type: 'pie',
+        marker: {
+          colors: ['white', 'transparent']
+        }
+      }], {
+        showlegend: false,
+        showlabels: false,
+        annotations: [{
+          font: {
+            size: 20,
+            color: 'white'
+          },
+          showarrow: false,
+          text: '91%',
+          x: 0.5,
+          y: 0.5
+        }],
+        height: 80,
+        margin: { t: 10, l: 0, r: 0, b: 10 },
+        paper_bgcolor: 'transparent',
+        plot_bgcolor: 'transparent'
+      }, {
+        staticPlot: true
+      });
+
+      var cpuUsagePlot = document.getElementById('cpu-usage-plot');
+      Plotly.plot(cpuUsagePlot, [{
+        x: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+        y: [1, 2, 4, 8, 16, 20, 26, 30, 32, 35, 30, 29, 26, 25, 22, 19, 23, 26, 27, 31],
+        fill: 'tozeroy',
+        marker: {
+          color: 'white',
+          size: 3
+        },
+        line: {
+          shape: 'spline'
+        }
+      }], {
+        xaxis: { showticklabels: false, showgrid: false },
+        yaxis: { range: [0, 100], zeroline: false, showgrid: false, showticklabels: true },
+        margin: { t: 0, l: 0, r: 0, b: 0 },
+        paper_bgcolor: 'transparent',
+        plot_bgcolor: 'transparent'
+      }, {
+        staticPlot: true
+      });
+
+      setInterval(function () {
+        // Randomize CPU
+        for (var i = 0; i < cpuUsagePlot.data.length; i++) {
+          var oldX = cpuUsagePlot.data[i].x[cpuUsagePlot.data[i].x.length - 1];
+          var oldY = cpuUsagePlot.data[i].y[cpuUsagePlot.data[i].y.length - 1];
+          var newX = oldX + 1;
+          var newY = Math.max(Math.min(oldY + Math.random() * 10 * (Math.random() < .5 ? 1 : -1), 100), 0);
+          // Remove first element
+          cpuUsagePlot.data[i].x.shift();
+          cpuUsagePlot.data[i].y.shift();
+          // Add new element to the end
+          cpuUsagePlot.data[i].x.push(newX);
+          cpuUsagePlot.data[i].y.push(newY);
+          // Redraw
+          Plotly.redraw(cpuUsagePlot);
+        }
+      }, 1000);
+
+      setInterval(function () {
+        // Randomize transfer rate
+        var transferRate = document.getElementById('transfer-rate');
+        var oldTransferRate = parseFloat(transferRate.innerHTML);
+        var newTransferRate = Math.max(Math.min(oldTransferRate + Math.random() * 0.3 * (Math.random() < .5 ? 1 : -1), 1.5), 0);
+        transferRate.innerHTML = Math.round(newTransferRate * 10) / 10;
+      }, 1200);
+    </script>
+</body>
+
+</html>
