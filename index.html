@@ -4,27 +4,623 @@
 <head>
     <meta charset="UTF-8">
     <title>Gjallarhorn</title>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="lib/css/materialize.css" rel="stylesheet" media="screen,projection">
-    <link href="style.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      /* Responsive plots */
+      .col2 {
+        max-width: 100%;
+      }
+      .responsive-plot {
+        width: 100%;
+      }
+
+      /* Counter */
+      .counter-value {
+        font-size: 4rem;
+        line-height: 1;
+        display: block;
+        text-align: center;
+      }
+
+      /* Editor */
+      .editor-container {
+        position: relative;
+      }
+      .editor {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+
+      /* Cards */
+      .card-accent-lighter {
+        color: rgba(255, 255, 255, 0.4);
+        margin-top: 5px;
+        z-index: 1000;
+        position: absolute;
+        right: 0;
+      }
+      .card-accent-darker {
+        color: rgba(0, 0, 0, 0.4);
+        margin-top: 5px;
+        z-index: 1000;
+        position: absolute;
+        right: 0;
+      }
+
+      /* Profile */
+      .heading {
+        margin-top: 20px;
+        margin-bottom: 2px;
+        overflow: auto;
+      }
+
+      /* Heading */
+      h1 {
+        text-transform: uppercase;
+        font-weight: 200;
+        font-size: 2rem;
+        margin-top: 20px;
+      }
+
+      .left-side {
+        float: left;
+        width: 20%;
+        height: 100vh;
+      }
+      .right-side {
+        float: left;
+        width: 80%;
+      }
+      .right-side-container {
+        padding: 0 2%;
+      }
+
+
+
+      /* new */
+      .nav-wrapper {
+          padding-left: 10px;
+      }
+
+      .feedback {
+          width: 400px;
+          position: absolute;
+          right: 0;
+          top: 57px;
+          z-index: 1000;
+          opacity: 0;
+          transition: opacity 0.2s;
+      }
+      .feedback .card-content {
+          padding-top: 0;
+      }
+      .feedback .material-icons:hover {
+          color:#5e35b1;
+          cursor: pointer;
+      }
+      .feedback .to-the-left {
+          padding-left: 0;
+          left: 0;
+      }
+      .feedback .small {
+          font-size: 3rem;
+      }
+      .feedback .small:first-child {
+          margin-right: 20px;
+      }
+      [type="checkbox"]:checked + label:before {
+          border-right: 2px solid #5e35b1;
+        border-bottom: 2px solid #5e35b1;
+      }
+
+
+      .profile {
+          width: 200px;
+          position: absolute;
+          right: 0;
+          top: 57px;
+          z-index: 1000;
+          opacity: 0;
+          padding-top: 10px;
+          transition: opacity 0.2s;
+      }
+      .profile hr {
+          margin-bottom: 0;
+      }
+      .profile a {
+          width: 100%;
+          display: block;
+          text-align: center;
+          padding-left: 0;
+      }
+      .profile .name {
+          font-size: 1.1rem;
+      }
+      .profile div {
+          padding-left: 10px;
+      }
+
+      #textarea1:focus {
+  border-bottom: 1px solid #5e35b1;
+  -webkit-box-shadow: 0 1px 0 0 #5e35b1;
+  -moz-box-shadow: 0 1px 0 0 #5e35b1;
+  box-shadow: 0 1px 0 0 #5e35b1;
+}
+.feedback .input-field label.active {
+    color: #5e35b1 !important;
+}
+.show-opacity {
+  opacity: 1;
+}
+nav {
+    margin: 0 !important;
+}
+.hero {
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) );
+    background-size: cover;
+    color: white;
+    padding-top: 100px;
+    padding-bottom: 20px;
+    min-height: 600px;
+}
+.hero h1 {
+    font-size: 3.5rem;
+    margin: 0;
+    margin-bottom: 40px;
+    text-align: center;
+}
+.hero p {
+    font-size: 2.4rem;
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 50px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.hero form {
+    width: 100%;
+    overflow: hidden;
+}
+.hero #search2 {
+    font-size: 2rem;
+    text-align: center;
+    padding-left: 0;
+    padding: 10px;
+    width: 100%;
+    border-bottom: 1px solid #9e9e9e !important;
+}
+.hero .close-search {
+    margin-top: 15px !important;
+}
+
+.parallax {
+    width: 100%;
+    margin: 0;
+}
+
+    .parallax-container {
+      min-height: 600px;
+      width: 100%;
+      margin: 0 !important;
+    }
+
+    </style>
 </head>
 
-<body>
-    <a class="waves-effect waves-light btn">button</a>
-    <a class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>button</a>
-    <a class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>button</a>
-    <div id="tester" style="width:600px;height:250px;"></div>
-    <script src="lib/jquery.js"></script>
-    <script src="lib/plotly.js"></script>
-    <script src="lib/js/materialize.js"></script>
-    <script>
-        TESTER = document.getElementById('tester');
-	Plotly.plot( TESTER, [{
-	x: [1, 2, 3, 4, 5],
-	y: [1, 2, 4, 8, 16] }], {
-	margin: { t: 0 } } );
 
+<!-- CAN WE MAKE THE ACCENT BUTTON AND CHARTS THE COLOR OF HER SHIRT GRAY PURPLE? -->
+
+<body>
+    <div class="profile card">
+    <div class="name">John Doe</div>
+    <div class="grey-text">john.doe@example.com</div>
+    <hr/>
+    <a class="waves-effect waves-grey btn-flat">Sign out</a>
+  </div>
+
+<div class="feedback card">
+    <div class="card-content">
+    <span class="card-title">We want your feedback</span>
+    <p style="margin-bottom: 5px;">How was your overall experience?</p>
+    <p><i class="material-icons small">sentiment_satisfied</i><i class="material-icons small">sentiment_dissatisfied</i></p>
+
+        <div class="input-field">
+          <textarea id="textarea1" class="materialize-textarea"></textarea>
+          <label for="textarea1" class="to-the-left">Tell us more about your experience</label>
+        </div>
+         <p>
+      <input type="checkbox" id="test5" />
+      <label for="test5">Yes, it's okay to email me about my feedback</label>
+    </p>
+    <br/>
+      <button class="btn waves-effect waves-light deep-purple darken-1" type="submit" name="action">Submit
+  </button>
+  </div>
+</div>
+
+
+<nav>
+    <div class="nav-wrapper black">
+      <a href="dashboard.html" class="brand-logo">Gjallarhorn</a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+
+      <ul class="right hide-on-med-and-down">
+        <li><a  class="dropdown-button feedback-button" href="#" onclick="$('.feedback').toggleClass('show-opacity')"><i class="material-icons">sentiment_satisfied</i></a></li>
+        <li><a href="#"><i class="material-icons" onclick="$('.profile').toggleClass('show-opacity')">account_circle</i></a></li>
+      </ul>
+
+      <form class="right hide-on-med-and-down">
+        <div class="input-field">
+          <input id="search" type="search" required>
+          <label for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#">My tasks</a></li>
+        <li><a href="tasks.html">Browse</a></li>
+        <li><a href="#">Learn</a></li>
+      </ul>
+
+      <ul class="side-nav" id="mobile-demo">
+        <li><a href="#">My tasks</a></li>
+        <li><a href="tasks.html">Browse</a></li>
+        <li><a href="#">Learn</a></li>
+      </ul>
+    </div>
+  </nav>
+
+<div class="parallax-container" style="top: -15px;">
+    <div class="parallax"><img src="assets/img/startup-photos.jpg"></div>
+    <div class="hero">
+    <h1>Work smarter</h1>
+      <p class="flow-text">Design automated tasks that interact with different services to receive notifications, send files, collect data, and more.</p>
+
+
+      <form>
+        <div class="input-field search-field">
+          <input id="search2" type="search" required placeholder="What do you want to automate?">
+          <i class="material-icons close-search">close</i>
+        </div>
+      </form>
+      </div>
+  </div>
+
+    <div class="grey lighten-3" style="padding: 40px 10px 10px 10px; margin-bottom: 50px; margin-top: -15px;">
+        <div class="row">
+            <div class="col l8 m12 offset-l2 offset=m0">
+        <a class="waves-effect waves-light black white-text btn-flat btn-large right">View more</a>
+        <h1 style="font-size: 2.1rem; margin:0; font-weight: 300;">Stay up to date</h1>
+        <p style="font-size: 1.2rem;">Get the latest information for your automated workflows.</p>
+        </div>
+        </div>
+    </div>
+
+<div class="row">
+    <div class="col l8 m12 offset-l2 offset-m0">
+
+
+
+
+      <div class="row">
+
+        <div class="col m12 l6">
+          <div class="card deep-purple darken-1" style="height: 163px;">
+            <i class="material-icons right card-accent-lighter">more_vert</i>
+            <div class="card-image">
+              <div id="cpu-usage-plot" class="responsive-plot" style="height: 100px;"></div>
+            </div>
+            <div class="card-action deep-purple darken-1 white-text center-align">
+              CPU usage
+            </div>
+          </div>
+        </div>
+
+        <div class="col m12 l6">
+          <div class="card deep-purple darken-1" style="height: 163px;">
+            <i class="material-icons right card-accent-lighter">more_vert</i>
+            <div class="card-content white-text">
+              <span id="transfer-rate" class="counter-value">0.2</span>
+            </div>
+            <div class="card-action deep-purple darken-1 white-text center-align">
+              MB/s
+            </div>
+          </div>
+        </div>
+
+        <div class="col m12 l6">
+          <div class="card deep-purple darken-1" style="height: 163px;">
+            <i class="material-icons right card-accent-lighter">more_vert</i>
+            <div class="card-image">
+              <div id="success-plot" class="responsive-plot" style="height: 100px;"></div>
+            </div>
+            <div class="card-action deep-purple darken-1 center-align white-text">
+              Success rate
+            </div>
+          </div>
+        </div>
+
+        <div class="col m12 l6">
+          <div class="card deep-purple darken-1" style="height: 163px;">
+            <i class="material-icons right card-accent-lighter">more_vert</i>
+            <div class="card-content white-text">
+              <span class="counter-value">2</span>
+            </div>
+            <div class="card-action deep-purple darken-1 center-align white-text">
+              Errors today
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+</div>
+    </div>
+
+
+
+      <div class="grey lighten-3" style="padding: 40px 10px 10px 10px;">
+        <div class="row">
+            <div class="col l8 m12 offset-l2 offset=m0">
+        <a class="waves-effect waves-light black white-text btn-flat btn-large right">View more</a>
+        <h1 style="font-size: 2.1rem; margin:0; font-weight: 300;">Recent tasks</h1>
+        <p style="font-size: 1.2rem;">View information on your most frequent tasks.</p>
+        </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <div class="row" style="margin-top: 60px; margin-bottom: 60px;">
+            <div class="col l8 m12 offset-l2 offset=m0">
+
+
+
+        <div class="col s12">
+          <div class="card">
+            <i class="material-icons right card-accent-lighter">more_vert</i>
+            <div class="card-action deep-purple darken-1"style="padding: 15px 20px;">
+              <span class="card-title white-text" >Task history</span>
+            </div>
+            <div class="card-content" style="padding-top: 0; padding-bottom: 0;">
+              <table class="bordered responsive-table">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Task</th>
+                    <th class="right-align">Last run</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td class="deep-purple-text text-darken-1">aQxRhk</td><td>Task 1</td><td class="right-align deep-purple-text text-darken-1">32 minutes ago</td></tr>
+                  <tr><td class="deep-purple-text text-darken-1">zfgLmS</td><td>Task 2</td><td class="right-align deep-purple-text text-darken-1">5 hours ago</td></tr>
+                  <tr><td class="deep-purple-text text-darken-1">bVcXzn</td><td>Task 3</td><td class="right-align deep-purple-text text-darken-1">16 hours ago</td></tr>
+                  <tr style="border-bottom: 0;"><td class="deep-purple-text text-darken-1">UyeRMS</td><td>Task 4</td><td class="right-align deep-purple-text text-darken-1">yesterday</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+        <div class="col s12">
+          <div class="card deep-purple darken-1">
+            <i class="material-icons right card-accent-lighter">more_vert</i>
+            <div class="card-action deep-purple darken-1" style="padding: 15px 20px;">
+              <span class="card-title white-text">Latest logs</span>
+            </div>
+              <div class="editor-container" style="height: 245px;">
+<div id="log" class="editor">4/12/2016 3:27:12 PM > Starting "Task 1"
+4/12/2016 3:27:21 PM > Starting step "Query"
+4/12/2016 3:28:11 PM > Results:
+  [
+    {
+      Name: "Celery",
+      Type: "Vegetable"
+    },
+    {
+      Name: "Strawberry",
+      Type: "Fruit"
+    }
+  ]
+4/12/2016 3:29:87 PM > Starting step "FTP - Upload"
+4/12/2016 3:30:76 PM > Success
+4/12/2016 3:31:14 PM > "Task 1" completed in 4.2 seconds</div>
+
+            </div>
+          </div>
+        </div>
+        </div>
+        </div>
+
+    <div class="grey lighten-3" style="padding: 40px 10px 10px 10px;">
+        <div class="row">
+            <div class="col l8 m12 offset-l2 offset=m0">
+        <a class="waves-effect waves-light black white-text btn-flat btn-large right">View more</a>
+        <h1 style="font-size: 2.1rem; margin:0; font-weight: 300;">View templates</h1>
+        <p style="font-size: 1.2rem;">Pick from a wide variety of templates.</p>
+        </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <footer class="page-footer black" style="margin: 0;">
+                <div class="container">
+                  <div class="row">
+                    <div class="col l6 s12">
+                      <h5 class="white-text">Gjallarhorn</h5>
+                      <p class="grey-text text-lighten-4">Design automated tasks that interact with different services to receive notifications, send files, collect data, and more.</p>
+                    </div>
+                    <div class="col l4 offset-l2 s12">
+                      <h5 class="white-text">Links</h5>
+                      <ul>
+                        <li><a class="grey-text text-lighten-3" href="#!">My tasks</a></li>
+                        <li><a class="grey-text text-lighten-3" href="tasks.html">Browse</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Learn</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="footer-copyright">
+                  <div class="container">
+                  © 2016 Example
+                  </div>
+                </div>
+              </footer>
+
+
+
+
+
+
+
+
+    <script src="lib/jquery.js"></script>
+    <script src="lib/js/materialize.js"></script>
+    <script src="lib/plotly.js"></script>
+    <script src="lib/ace.js"></script>
+    <script>
+      // Console
+      var log = ace.edit("log");
+      log.renderer.setScrollMargin(10, 10);
+      log.renderer.setShowGutter(false);
+      log.setReadOnly(true);
+      log.setTheme("ace/theme/github");
+      log.getSession().setMode("ace/mode/javascript");
+
+      window.addEventListener('resize', function() {
+        var elements = document.getElementsByClassName('responsive-plot');
+        for (var i = 0; i < elements.length; i++) {
+          Plotly.Plots.resize(elements[i]);
+        }
+      });
+
+      var successPlot = document.getElementById('success-plot');
+      Plotly.plot(successPlot, [{
+        values: [91, 9],
+        labels: ['Success', 'Fail'],
+        textinfo: 'none',
+        text: [],
+        domain: {
+          x: [0, 1]
+        },
+        hole: .85,
+        hoverinfo: 'none',
+        type: 'pie',
+        marker: {
+          colors: ['white', 'transparent']
+        }
+      }], {
+        showlegend: false,
+        showlabels: false,
+        annotations: [{
+          font: {
+            size: 20,
+            color: 'white'
+          },
+          showarrow: false,
+          text: '91%',
+          x: 0.5,
+          y: 0.5
+        }],
+        height: 80,
+        margin: { t: 10, l: 0, r: 0, b: 10 },
+        paper_bgcolor: 'transparent',
+        plot_bgcolor: 'transparent'
+      }, {
+        staticPlot: true
+      });
+
+      var cpuUsagePlot = document.getElementById('cpu-usage-plot');
+      Plotly.plot(cpuUsagePlot, [{
+        x: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+        y: [1, 2, 4, 8, 16, 20, 26, 30, 32, 35, 30, 29, 26, 25, 22, 19, 23, 26, 27, 31],
+        fill: 'tozeroy',
+        marker: {
+          color: 'white',
+          size: 3
+        },
+        line: {
+          shape: 'spline'
+        }
+      }], {
+        xaxis: { showticklabels: false, showgrid: false },
+        yaxis: { range: [0, 100], zeroline: false, showgrid: false, showticklabels: true },
+        margin: { t: 0, l: 0, r: 0, b: 0 },
+        paper_bgcolor: 'transparent',
+        plot_bgcolor: 'transparent'
+      }, {
+        staticPlot: true
+      });
+
+      setInterval(function () {
+        // Randomize CPU
+        for (var i = 0; i < cpuUsagePlot.data.length; i++) {
+          var oldX = cpuUsagePlot.data[i].x[cpuUsagePlot.data[i].x.length - 1];
+          var oldY = cpuUsagePlot.data[i].y[cpuUsagePlot.data[i].y.length - 1];
+          var newX = oldX + 1;
+          var newY = Math.max(Math.min(oldY + Math.random() * 10 * (Math.random() < .5 ? 1 : -1), 100), 0);
+          // Remove first element
+          cpuUsagePlot.data[i].x.shift();
+          cpuUsagePlot.data[i].y.shift();
+          // Add new element to the end
+          cpuUsagePlot.data[i].x.push(newX);
+          cpuUsagePlot.data[i].y.push(newY);
+          // Redraw
+          Plotly.redraw(cpuUsagePlot);
+        }
+      }, 1000);
+
+      setInterval(function () {
+        // Randomize transfer rate
+        var transferRate = document.getElementById('transfer-rate');
+        var oldTransferRate = parseFloat(transferRate.innerHTML);
+        var newTransferRate = Math.max(Math.min(oldTransferRate + Math.random() * 0.3 * (Math.random() < .5 ? 1 : -1), 1.5), 0);
+        transferRate.innerHTML = Math.round(newTransferRate * 10) / 10;
+      }, 1200);
     </script>
+
+
+
+    <script>
+        $(".button-collapse").sideNav();
+        $('.parallax').parallax();
+          Materialize.toast('Welcome back!', 1500)
+    </script>
+
 </body>
 
 </html>

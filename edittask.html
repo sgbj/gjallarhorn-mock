@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gjallarhorn</title>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="lib/css/materialize.css" rel="stylesheet" media="screen,projection">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        /* Responsive plots */
+        
+        .col2 {
+            max-width: 100%;
+        }
+        
+        .responsive-plot {
+            width: 100%;
+        }
+        /* Counter */
+        
+        .counter-value {
+            font-size: 4rem;
+            line-height: 1;
+            display: block;
+            text-align: center;
+        }
+        /* Editor */
+        
+        .editor-container {
+            position: relative;
+        }
+        
+        .editor {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        /* Cards */
+        
+        .card-accent-lighter {
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 5px;
+            z-index: 1000;
+            position: absolute;
+            right: 0;
+        }
+        
+        .card-accent-darker {
+            color: rgba(0, 0, 0, 0.4);
+            margin-top: 5px;
+            z-index: 1000;
+            position: absolute;
+            right: 0;
+        }
+        /* Profile */
+        
+        .heading {
+            margin-top: 20px;
+            margin-bottom: 2px;
+            overflow: auto;
+        }
+        /* Heading */
+        
+        h1 {
+            text-transform: uppercase;
+            font-weight: 200;
+            font-size: 2rem;
+            margin-top: 20px;
+        }
+        
+        .left-side {
+            float: left;
+            width: 20%;
+            height: 100vh;
+        }
+        
+        .right-side {
+            float: left;
+            width: 80%;
+        }
+        
+        .right-side-container {
+            padding: 0 2%;
+        }
+        /* new */
+        
+        .nav-wrapper {
+            padding-left: 10px;
+        }
+        
+        .feedback {
+            width: 400px;
+            position: absolute;
+            right: 0;
+            top: 57px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        
+        .feedback .card-content {
+            padding-top: 0;
+        }
+        
+        .feedback .material-icons:hover {
+            color: #5e35b1;
+            cursor: pointer;
+        }
+        
+        .to-the-left {
+            padding-left: 0;
+            left: 0 !important;
+        }
+        
+        .feedback .small {
+            font-size: 3rem;
+        }
+        
+        .feedback .small:first-child {
+            margin-right: 20px;
+        }
+        
+        [type="checkbox"]:checked + label:before {
+            border-right: 2px solid #5e35b1;
+            border-bottom: 2px solid #5e35b1;
+        }
+        
+        .profile {
+            width: 200px;
+            position: absolute;
+            right: 0;
+            top: 57px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.2s;
+            padding-top: 10px;
+        }
+        
+        .profile hr {
+            margin-bottom: 0;
+        }
+        
+        .profile a {
+            width: 100%;
+            display: block;
+            text-align: center;
+            padding-left: 0;
+        }
+        
+        .profile .name {
+            font-size: 1.1rem;
+        }
+        
+        .profile div {
+            padding-left: 10px;
+        }
+        
+        #textarea1:focus {
+            border-bottom: 1px solid #5e35b1;
+            -webkit-box-shadow: 0 1px 0 0 #5e35b1;
+            -moz-box-shadow: 0 1px 0 0 #5e35b1;
+            box-shadow: 0 1px 0 0 #5e35b1;
+        }
+        
+        .input-field label.active {
+            color: #5e35b1 !important;
+        }
+        
+        input[type=text]:focus {
+            border-bottom: 1px solid #5e35b1 !important;
+            -webkit-box-shadow: 0 1px 0 0 #5e35b1;
+            -moz-box-shadow: 0 1px 0 0 #5e35b1;
+            box-shadow: 0 1px 0 0 #5e35b1 !important;
+        }
+        
+        .show-opacity {
+            opacity: 1;
+        }
+        
+        nav {
+            margin: 0 !important;
+        }
+        
+        .hero {
+            background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+            background-size: cover;
+            color: white;
+            padding-top: 100px;
+            padding-bottom: 20px;
+            min-height: 600px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin: 0;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .hero p {
+            font-size: 2.4rem;
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+            margin-bottom: 50px;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        
+        .hero form {
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .hero #search2 {
+            font-size: 2rem;
+            text-align: center;
+            padding-left: 0;
+            padding: 10px;
+            width: 100%;
+            border-bottom: 1px solid #9e9e9e !important;
+        }
+        
+        .hero .close-search {
+            margin-top: 15px !important;
+        }
+        
+        .parallax {
+            width: 100%;
+            margin: 0;
+        }
+        
+        .parallax-container {
+            min-height: 600px;
+            width: 100%;
+            margin: 0 !important;
+        }
+        
+        .search-task {
+            overflow: hidden;
+        }
+        
+        .search-task input {
+            font-size: 1.25rem;
+            text-align: left;
+            padding-left: 0 !important;
+            padding: 10px !important;
+            width: 100% !important;
+            border-bottom: 1px solid #9e9e9e !important;
+        }
+        
+        .search-task .close-search {
+            margin-top: 15px !important;
+        }
+        
+        .arrow-align {
+            text-align: center;
+            margin: -20px 0 -10px 0;
+        }
+        
+        .arrow {
+            margin: -20px 0 -10px 0;
+        }
+    </style>
+</head>
+
+
+<!-- CAN WE MAKE THE ACCENT BUTTON AND CHARTS THE COLOR OF HER SHIRT GRAY PURPLE? -->
+
+<body>
+    <div class="profile card">
+        <div class="name">John Doe</div>
+        <div class="grey-text">john.doe@example.com</div>
+        <hr/>
+        <a class="waves-effect waves-grey btn-flat">Sign out</a>
+    </div>
+
+    <div class="feedback card">
+        <div class="card-content">
+            <span class="card-title">We want your feedback</span>
+            <p style="margin-bottom: 5px;">How was your overall experience?</p>
+            <p><i class="material-icons small">sentiment_satisfied</i><i class="material-icons small">sentiment_dissatisfied</i></p>
+
+            <div class="input-field">
+                <textarea id="textarea1" class="materialize-textarea"></textarea>
+                <label for="textarea1" class="to-the-left">Tell us more about your experience</label>
+            </div>
+            <p>
+                <input type="checkbox" id="test5" />
+                <label for="test5">Yes, it's okay to email me about my feedback</label>
+            </p>
+            <br/>
+            <button class="btn waves-effect waves-light deep-purple darken-1" type="submit" name="action">Submit
+  </button>
+        </div>
+    </div>
+
+
+    <nav>
+        <div class="nav-wrapper black">
+            <a href="dashboard.html" class="brand-logo">Gjallarhorn</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+
+            <ul class="right hide-on-med-and-down">
+                <li>
+                    <a class="dropdown-button feedback-button" href="#" onclick="$('.feedback').toggleClass('show-opacity')"><i class="material-icons">sentiment_satisfied</i></a>
+                </li>
+                <li><a href="#"><i class="material-icons" onclick="$('.profile').toggleClass('show-opacity')">account_circle</i></a></li>
+            </ul>
+
+            <form class="right hide-on-med-and-down">
+                <div class="input-field">
+                    <input id="search" type="search" required>
+                    <label for="search"><i class="material-icons">search</i></label>
+                    <i class="material-icons">close</i>
+                </div>
+            </form>
+
+            <ul class="right hide-on-med-and-down">
+                <li><a href="#">My tasks</a></li>
+                <li><a href="tasks.html">Browse</a></li>
+                <li><a href="#">Learn</a></li>
+            </ul>
+
+            <ul class="side-nav" id="mobile-demo">
+                <li><a href="#">My tasks</a></li>
+                <li><a href="tasks.html">Browse</a></li>
+                <li><a href="#">Learn</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="grey lighten-3" style="padding: 40px 10px 10px 10px; margin-bottom: 50px;">
+        <div class="row">
+            <div class="col l8 m12 offset-l2 offset-m0">
+                <h1 style="font-size: 2.1rem; margin:0; font-weight: 300;">Edit task</h1>
+            </div>
+            <div class="col l2 m12 right-align">
+                <a class="btn-flat tooltipped" data-position="bottom" data-delay="50" data-tooltip="Expand All"><i class="material-icons">add</i></a>
+                <a class="btn-flat tooltipped" data-position="bottom" data-delay="50" data-tooltip="Collapse All"><i class="material-icons">remove</i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col l8 m12 offset-l2 offset-m0">
+            <div class="row">
+                <ul class="collapsible col m12 l6 offset-l3" style="padding: 0;" data-collapsible="accordian">
+                    <li class="expand">
+                        <div class="collapsible-header deep-purple darken-1 white-text">
+                            <i class="material-icons">alarm</i>Recurrence
+                        </div>
+                        <div class="collapsible-body">
+
+                            <div class="input-field col s6">
+                                <input id="interval" type="text">
+                                <label for="interval">Interval</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <select>
+                                    <option value="" disabled selected>Choose</option>
+                                    <option value="1">Seconds</option>
+                                    <option value="2">Minutes</option>
+                                    <option value="3">Hours</option>
+                                    <option value="4">Days</option>
+                                    <option value="5">Months</option>
+                                </select>
+                                <label>Frequency</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input id="starttime" type="text">
+                                <label for="starttime">Start Time</label>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="row arrow-align"><i class="material-icons medium deep-purple-text text-darken-1">arrow_downward</i></div>
+            <div class="row">
+                <ul class="collapsible col m12 l6 offset-l3" style="padding: 0;" data-collapsible="accordian">
+                    <li class="expand">
+                        <div class="collapsible-header blue darken-1 white-text">
+                            <i class="material-icons">subject</i>SQL Connection
+                        </div>
+                        <div class="collapsible-body">
+
+                            <div class="input-field col s6">
+                                <input id="interval" type="text">
+                                <label for="interval">Interval</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <select>
+                                    <option value="" disabled selected>Choose</option>
+                                    <option value="1">Seconds</option>
+                                    <option value="2">Minutes</option>
+                                    <option value="3">Hours</option>
+                                    <option value="4">Days</option>
+                                    <option value="5">Months</option>
+                                </select>
+                                <label>Frequency</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input id="starttime" type="text">
+                                <label for="starttime">Start Time</label>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="row arrow-align"><i class="material-icons medium deep-purple-text text-darken-1">arrow_downward</i></div>
+            <div class="row">
+                <ul class="collapsible col m12 l6 offset-l3" style="padding: 0;" data-collapsible="accordian">
+                    <li class="expand">
+                        <div class="collapsible-header amber darken-1 white-text">
+                            <i class="material-icons">device_hub</i>Conditional
+                        </div>
+                        <div class="collapsible-body">
+
+                            <div class="input-field col s6">
+                                <input id="interval" type="text">
+                                <label for="interval">Interval</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <select>
+                                    <option value="" disabled selected>Choose</option>
+                                    <option value="1">Seconds</option>
+                                    <option value="2">Minutes</option>
+                                    <option value="3">Hours</option>
+                                    <option value="4">Days</option>
+                                    <option value="5">Months</option>
+                                </select>
+                                <label>Frequency</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input id="starttime" type="text">
+                                <label for="starttime">Start Time</label>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="row arrow">
+                <i class="material-icons medium teal-text text-lighten-1 col s3 offset-s3">check</i>
+                <i class="material-icons medium red-text text-darken-1 col s3 offset-s2">close</i>
+            </div>
+            <div class="row">
+                <ul class="collapsible col m12 l6" style="padding: 0;" data-collapsible="accordian">
+                    <li class="expand">
+                        <div class="collapsible-header teal lighten-1 white-text">
+                            <i class="material-icons">sentiment_very_satisfied</i>If Yes
+                        </div>
+                        <div class="collapsible-body">
+
+                            <div class="input-field col s6">
+                                <input id="interval" type="text">
+                                <label for="interval">Interval</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <select>
+                                    <option value="" disabled selected>Choose</option>
+                                    <option value="1">Seconds</option>
+                                    <option value="2">Minutes</option>
+                                    <option value="3">Hours</option>
+                                    <option value="4">Days</option>
+                                    <option value="5">Months</option>
+                                </select>
+                                <label>Frequency</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input id="starttime" type="text">
+                                <label for="starttime">Start Time</label>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="collapsible col m12 l6" style="padding: 0;" data-collapsible="accordian">
+                    <li class="expand">
+                        <div class="collapsible-header red darken-1 white-text">
+                            <i class="material-icons">sentiment_very_dissatisfied</i>If No
+                        </div>
+                        <div class="collapsible-body">
+
+                            <div class="input-field col s6">
+                                <input id="interval" type="text">
+                                <label for="interval">Interval</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <select>
+                                    <option value="" disabled selected>Choose</option>
+                                    <option value="1">Seconds</option>
+                                    <option value="2">Minutes</option>
+                                    <option value="3">Hours</option>
+                                    <option value="4">Days</option>
+                                    <option value="5">Months</option>
+                                </select>
+                                <label>Frequency</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input id="starttime" type="text">
+                                <label for="starttime">Start Time</label>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="row arrow-align"><i class="material-icons medium deep-purple-text text-darken-1">arrow_downward</i></div>
+            <div class="row">
+                <ul class="collapsible col m12 l6 offset-l3" style="padding: 0;" data-collapsible="accordian">
+                    <li class="expand">
+                        <div class="collapsible-header pink accent-2 white-text">
+                            <i class="material-icons">cloud_upload</i>FTP
+                        </div>
+                        <div class="collapsible-body">
+
+                            <div class="input-field col s6">
+                                <input id="interval" type="text">
+                                <label for="interval">Interval</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <select>
+                                    <option value="" disabled selected>Choose</option>
+                                    <option value="1">Seconds</option>
+                                    <option value="2">Minutes</option>
+                                    <option value="3">Hours</option>
+                                    <option value="4">Days</option>
+                                    <option value="5">Months</option>
+                                </select>
+                                <label>Frequency</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input id="starttime" type="text">
+                                <label for="starttime">Start Time</label>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="row" style="text-align:center">
+                <a class="btn-floating btn-large waves-effect waves-light deep-purple darken-1 tooltipped" data-position="right" data-delay="50"
+                    data-tooltip="Add Flow"><i class="material-icons">add</i></a>
+            </div>
+
+        </div>
+    </div>
+
+
+    <footer class="page-footer black" style="margin: 0;">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Gjallarhorn</h5>
+                    <p class="grey-text text-lighten-4">Design automated tasks that interact with different services to receive notifications, send files, collect
+                        data, and more.</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="#!">My tasks</a></li>
+                        <li><a class="grey-text text-lighten-3" href="tasks.html">Browse</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Learn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2016 Example
+            </div>
+        </div>
+    </footer>
+
+
+
+
+
+
+
+
+    <script src="lib/jquery.js"></script>
+
+    <script src="lib/jquery.sparkline.js"></script>
+    <script src="lib/js/materialize.js"></script>
+    <script src="lib/plotly.js"></script>
+    <script src="lib/ace.js"></script>
+
+    <script>
+        $(".button-collapse").sideNav();
+        $('.parallax').parallax();
+    </script>
+
+</body>
+
+</html>
