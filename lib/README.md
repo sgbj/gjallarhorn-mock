@@ -1,31 +1,19 @@
-# Using distributed files
+jQuery Sparklines
+=================
 
-Import plotly.js as:
+This jQuery plugin makes it easy to generate a number of different types
+of sparklines directly in the browser, using online a line of two of HTML 
+and Javascript.
 
-```html
-<script type="text/javascript" src="plotly.min.js"></script>
+The plugin has no dependencies other than jQuery and works with all modern 
+browsers and also Internet Explorer 6 and later (excanvas is not required
+for IE support).
 
-```
+See the [jQuery Sparkline project page](http://omnipotent.net/jquery.sparkline/)
+for live examples and documentation.
 
-or the un-minified version as:
+## License
 
-```html
-<script type="text/javascript" src="plotly.js" charset="utf-8"></script>
-```
+Released under the New BSD License
 
-To support IE9, put:
-
-```html
-<script>if(typeof window.Int16Array !== 'function')document.write("<scri"+"pt src='extras/typedarray.min.js'></scr"+"ipt>");</script>
-```
-
-before the plotly.js script tag.
-
-
-To add MathJax, put
-
-```html
-<script type="text/javascript" src="mathjax/MathJax.js?config=TeX-AMS-MML_SVG"></script>
-```
-
-before the plotly.js script tag. You can grab the relevant MathJax files in `./dist/extras/mathjax/`. 
+(c) Splunk, Inc 2012

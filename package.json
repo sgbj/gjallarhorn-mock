@@ -25,6 +25,7 @@
   "dependencies": {
     "ace-builds": "^1.2.2",
     "jquery": "^2.2.3",
+    "jquery-sparkline": "^2.3.2",
     "materialize-css": "^0.97.6",
     "plotly.js": "^1.8.0"
   }

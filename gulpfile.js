@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 
-var path = ['node_modules/materialize-css/dist/**/*', 'node_modules/jquery/dist/**/*', 'node_modules/plotly.js/dist/**/*', 'node_modules/ace-builds/src-min/**/*'];
+var path = ['node_modules/materialize-css/dist/**/*', 'node_modules/jquery/dist/**/*', 'node_modules/plotly.js/dist/**/*', 'node_modules/ace-builds/src-min/**/*', 'node_modules/jquery-sparkline/**/*'];
 
 
 gulp.task('default', ['sass', 'lib'], function() {

@@ -77,21 +77,22 @@
       .right-side-container {
         padding: 0 2%;
       }
-      
-      
-      
+
+
+
       /* new */
       .nav-wrapper {
           padding-left: 10px;
       }
-      
+
       .feedback {
           width: 400px;
           position: absolute;
           right: 0;
           top: 57px;
           z-index: 1000;
-          display: none;
+          opacity: 0;
+          transition: opacity 0.2s;
       }
       .feedback .card-content {
           padding-top: 0;
@@ -114,16 +115,17 @@
           border-right: 2px solid #5e35b1;
         border-bottom: 2px solid #5e35b1;
       }
-      
-      
+
+
       .profile {
           width: 200px;
           position: absolute;
           right: 0;
           top: 57px;
           z-index: 1000;
-          display: none;
+          opacity: 0;
           padding-top: 10px;
+          transition: opacity 0.2s;
       }
       .profile hr {
           margin-bottom: 0;
@@ -140,7 +142,7 @@
       .profile div {
           padding-left: 10px;
       }
-      
+
       #textarea1:focus {
   border-bottom: 1px solid #5e35b1;
   -webkit-box-shadow: 0 1px 0 0 #5e35b1;
@@ -150,7 +152,9 @@
 .feedback .input-field label.active {
     color: #5e35b1 !important;
 }
-
+.show-opacity {
+  opacity: 1;
+}
 nav {
     margin: 0 !important;
 }
@@ -203,7 +207,7 @@ nav {
       width: 100%;
       margin: 0 !important;
     }
-        
+
     </style>
 </head>
 
@@ -217,7 +221,7 @@ nav {
     <hr/>
     <a class="waves-effect waves-grey btn-flat">Sign out</a>
   </div>
-    
+
 <div class="feedback card">
     <div class="card-content">
     <span class="card-title">We want your feedback</span>
@@ -241,14 +245,14 @@ nav {
 
 <nav>
     <div class="nav-wrapper black">
-      <a href="#!" class="brand-logo">Gjallarhorn</a>
+      <a href="dashboard.html" class="brand-logo">Gjallarhorn</a>
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-      
+
       <ul class="right hide-on-med-and-down">
-        <li><a  class="dropdown-button feedback-button" href="#" onclick="$('.feedback').toggle()"><i class="material-icons">sentiment_satisfied</i></a></li>
-        <li><a href="#"><i class="material-icons" onclick="$('.profile').toggle()">account_circle</i></a></li>
+        <li><a  class="dropdown-button feedback-button" href="#" onclick="$('.feedback').toggleClass('show-opacity')"><i class="material-icons">sentiment_satisfied</i></a></li>
+        <li><a href="#"><i class="material-icons" onclick="$('.profile').toggleClass('show-opacity')">account_circle</i></a></li>
       </ul>
-      
+
       <form class="right hide-on-med-and-down">
         <div class="input-field">
           <input id="search" type="search" required>
@@ -256,16 +260,16 @@ nav {
           <i class="material-icons">close</i>
         </div>
       </form>
-      
+
       <ul class="right hide-on-med-and-down">
         <li><a href="#">My tasks</a></li>
-        <li><a href="#">Browse</a></li>
+        <li><a href="tasks.html">Browse</a></li>
         <li><a href="#">Learn</a></li>
       </ul>
-      
+
       <ul class="side-nav" id="mobile-demo">
         <li><a href="#">My tasks</a></li>
-        <li><a href="#">Browse</a></li>
+        <li><a href="tasks.html">Browse</a></li>
         <li><a href="#">Learn</a></li>
       </ul>
     </div>
@@ -276,8 +280,8 @@ nav {
     <div class="hero">
     <h1>Work smarter</h1>
       <p class="flow-text">Design automated tasks that interact with different services to receive notifications, send files, collect data, and more.</p>
-      
-      
+
+
       <form>
         <div class="input-field search-field">
           <input id="search2" type="search" required placeholder="What do you want to automate?">
@@ -285,8 +289,8 @@ nav {
         </div>
       </form>
       </div>
-  </div>  
-    
+  </div>
+
     <div class="grey lighten-3" style="padding: 40px 10px 10px 10px; margin-bottom: 50px; margin-top: -15px;">
         <div class="row">
             <div class="col l8 m12 offset-l2 offset=m0">
@@ -299,10 +303,10 @@ nav {
 
 <div class="row">
     <div class="col l8 m12 offset-l2 offset-m0">
-    
-    
-    
-    
+
+
+
+
       <div class="row">
 
         <div class="col m12 l6">
@@ -340,7 +344,7 @@ nav {
             </div>
           </div>
         </div>
-        
+
         <div class="col m12 l6">
           <div class="card deep-purple darken-1" style="height: 163px;">
             <i class="material-icons right card-accent-lighter">more_vert</i>
@@ -359,9 +363,9 @@ nav {
 
 </div>
     </div>
-    
-    
-    
+
+
+
       <div class="grey lighten-3" style="padding: 40px 10px 10px 10px;">
         <div class="row">
             <div class="col l8 m12 offset-l2 offset=m0">
@@ -371,21 +375,21 @@ nav {
         </div>
         </div>
     </div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
     <div class="row" style="margin-top: 60px; margin-bottom: 60px;">
             <div class="col l8 m12 offset-l2 offset=m0">
-        
-        
-        
+
+
+
         <div class="col s12">
           <div class="card">
             <i class="material-icons right card-accent-lighter">more_vert</i>
@@ -448,7 +452,7 @@ nav {
         </div>
         </div>
         </div>
-    
+
     <div class="grey lighten-3" style="padding: 40px 10px 10px 10px;">
         <div class="row">
             <div class="col l8 m12 offset-l2 offset=m0">
@@ -458,19 +462,19 @@ nav {
         </div>
         </div>
     </div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
       <footer class="page-footer black" style="margin: 0;">
@@ -484,7 +488,7 @@ nav {
                       <h5 class="white-text">Links</h5>
                       <ul>
                         <li><a class="grey-text text-lighten-3" href="#!">My tasks</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Browse</a></li>
+                        <li><a class="grey-text text-lighten-3" href="tasks.html">Browse</a></li>
                         <li><a class="grey-text text-lighten-3" href="#!">Learn</a></li>
                       </ul>
                     </div>
@@ -608,14 +612,15 @@ nav {
         transferRate.innerHTML = Math.round(newTransferRate * 10) / 10;
       }, 1200);
     </script>
-    
-    
-    
+
+
+
     <script>
         $(".button-collapse").sideNav();
         $('.parallax').parallax();
+          Materialize.toast('Welcome back!', 1500)
     </script>
-        
+
 </body>
 
 </html>
