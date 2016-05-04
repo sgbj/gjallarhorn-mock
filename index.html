@@ -8,6 +8,11 @@
     <link href="lib/css/materialize.css" rel="stylesheet" media="screen,projection">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
+      html {
+        width: 100%;
+        overflow-x: hidden;
+      }
+      
       /* Responsive plots */
       .col2 {
         max-width: 100%;
@@ -208,6 +213,19 @@ nav {
       width: 100%;
       margin: 0 !important;
     }
+    
+    
+    @media (max-width: 600px) {
+      .hero {
+        padding-top: 80px;
+      }
+      .hero h1 {
+        font-size: 3rem;
+      }
+  .hero p {
+    font-size: 1.8rem;
+  }
+}
 
     </style>
 </head>
@@ -294,7 +312,7 @@ nav {
 
     <div class="grey lighten-3" style="padding: 40px 10px 10px 10px; margin-bottom: 50px; margin-top: -15px;">
         <div class="row">
-            <div class="col l8 m12 offset-l2 offset=m0">
+            <div class="col l8 s12 offset-l2">
         <a class="waves-effect waves-light black white-text btn-flat btn-large right">View more</a>
         <h1 style="font-size: 2.1rem; margin:0; font-weight: 300;">Stay up to date</h1>
         <p style="font-size: 1.2rem;">Get the latest information for your automated workflows.</p>
@@ -310,7 +328,7 @@ nav {
 
       <div class="row">
 
-        <div class="col m12 l6">
+        <div class="col s12 l6">
           <div class="card deep-purple darken-1" style="height: 163px;">
             <i class="material-icons right card-accent-lighter">more_vert</i>
             <div class="card-image">
@@ -322,7 +340,7 @@ nav {
           </div>
         </div>
 
-        <div class="col m12 l6">
+        <div class="col s12 l6">
           <div class="card deep-purple darken-1" style="height: 163px;">
             <i class="material-icons right card-accent-lighter">more_vert</i>
             <div class="card-content white-text">
@@ -334,7 +352,7 @@ nav {
           </div>
         </div>
 
-        <div class="col m12 l6">
+        <div class="col s12 l6">
           <div class="card deep-purple darken-1" style="height: 163px;">
             <i class="material-icons right card-accent-lighter">more_vert</i>
             <div class="card-image">
@@ -346,7 +364,7 @@ nav {
           </div>
         </div>
 
-        <div class="col m12 l6">
+        <div class="col s12 l6">
           <div class="card deep-purple darken-1" style="height: 163px;">
             <i class="material-icons right card-accent-lighter">more_vert</i>
             <div class="card-content white-text">
@@ -369,7 +387,7 @@ nav {
 
       <div class="grey lighten-3" style="padding: 40px 10px 10px 10px;">
         <div class="row">
-            <div class="col l8 m12 offset-l2 offset=m0">
+            <div class="col l8 s12 offset-l2">
         <a class="waves-effect waves-light black white-text btn-flat btn-large right">View more</a>
         <h1 style="font-size: 2.1rem; margin:0; font-weight: 300;">Recent tasks</h1>
         <p style="font-size: 1.2rem;">View information on your most frequent tasks.</p>
@@ -387,7 +405,7 @@ nav {
 
 
     <div class="row" style="margin-top: 60px; margin-bottom: 60px;">
-            <div class="col l8 m12 offset-l2 offset=m0">
+            <div class="col l8 s12 offset-l2">
 
 
 
@@ -441,7 +459,7 @@ nav {
 
     <div class="grey lighten-3" style="padding: 40px 10px 10px 10px;">
         <div class="row">
-            <div class="col l8 m12 offset-l2 offset=m0">
+            <div class="col l8 s12 offset-l2">
         <a class="waves-effect waves-light black white-text btn-flat btn-large right">View more</a>
         <h1 style="font-size: 2.1rem; margin:0; font-weight: 300;">View templates</h1>
         <p style="font-size: 1.2rem;">Pick from a wide variety of templates.</p>
