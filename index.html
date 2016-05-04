@@ -431,22 +431,7 @@ nav {
               <span class="card-title white-text">Latest logs</span>
             </div>
               <div class="editor-container" style="height: 245px;">
-<div id="log" class="editor">4/12/2016 3:27:12 PM > Starting "Task 1"
-4/12/2016 3:27:21 PM > Starting step "Query"
-4/12/2016 3:28:11 PM > Results:
-  [
-    {
-      Name: "Celery",
-      Type: "Vegetable"
-    },
-    {
-      Name: "Strawberry",
-      Type: "Fruit"
-    }
-  ]
-4/12/2016 3:29:87 PM > Starting step "FTP - Upload"
-4/12/2016 3:30:76 PM > Success
-4/12/2016 3:31:14 PM > "Task 1" completed in 4.2 seconds</div>
+<div id="log" class="editor">Initializing...</div>
 
             </div>
           </div>
@@ -521,6 +506,64 @@ nav {
       log.setReadOnly(true);
       log.setTheme("ace/theme/github");
       log.getSession().setMode("ace/mode/javascript");
+      
+      // Auto update log
+      function randomLog() {
+        var lines = [
+          '\n{date} > Starting "Task {num}"',
+          '\n{date} > Starting step "Query"',
+          '\n{date} > Results:\n' +
+          '  [\n' +
+          '    { Name: "Celery", Type: "Vegetable" },\n' +
+          '    { Name: "Strawberry", Type: "Fruit" }\n' +
+          '  ]',
+          '\n{date} > Starting step "FTP - Upload"',
+          '\n{date} > Results:\n' +
+          '  [\n' +
+          '    { Name: "Doe, John", Age: 32 },\n' +
+          '    { Name: "Smith, Jane", Age: 27 }\n' +
+          '  ]',
+          '\n{date} > Starting step "Format - XML"',
+          '\n{date} > Starting step "Format - CSV"',
+          '\n{date} > Starting step "Script - Transform.js"',
+          '\n{date} > Success',
+          '\n{date} > "Task {num}" completed in {dec} seconds'
+        ];
+        
+        // Format date
+        var d = new Date();
+        var day = d.getDate();
+        var monthIndex = d.getMonth() + 1;
+        var year = d.getFullYear();
+        var hour = d.getHours();
+        var hh = hour > 12 ? hour - 12 : hour;
+        hh = hh >= 10 ? "" + hh : "0" + hh;
+        var mm = d.getMinutes();
+        mm = mm >= 10 ? "" + mm : "0" + mm;
+        var ss = d.getSeconds();
+        ss = ss >= 10 ? "" + ss : "0" + ss;
+        var ampm = hour >= 12 ? 'PM' : 'AM';
+        var date = day + "/" + monthIndex + "/" + year + " " + hh + ":" + mm + ":" + ss + " " + ampm;
+        
+        var idx = Math.floor(Math.random() * lines.length);
+        var num = Math.floor(Math.random() * 10) + 1;
+        var dec = (Math.floor(Math.random() * 100) + 10) / 10;
+        var session = log.getSession();
+        
+        var line = lines[idx];
+        line = line.replace("{date}", date).replace("{num}", num).replace("{dec}", dec);
+        
+        session.insert({
+          row: session.getLength(),
+          column: 0
+        }, line);
+        
+        log.scrollToLine(session.getLength()-2, true, true, function () {});
+        
+        setTimeout(randomLog, 2000 * Math.random());
+      }
+      
+      setTimeout(randomLog, 2000 * Math.random());
 
       window.addEventListener('resize', function() {
         var elements = document.getElementsByClassName('responsive-plot');
