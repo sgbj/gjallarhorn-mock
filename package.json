@@ -27,6 +27,7 @@
     "jquery": "^2.2.3",
     "jquery-sparkline": "^2.3.2",
     "materialize-css": "^0.97.6",
-    "plotly.js": "^1.8.0"
+    "plotly.js": "^1.8.0",
+    "typeahead.js": "^0.11.1"
   }
 }

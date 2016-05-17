@@ -263,6 +263,30 @@
         .arrow {
             margin: -20px 0 -10px 0;
         }
+        
+        .twitter-typeahead {
+            width: 400px;
+        }
+        
+        .tt-dataset {
+            margin: 0.5rem 0 1rem 0;
+            border: 1px solid #e0e0e0;
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .tt-suggestion {
+            background-color: #fff;
+            line-height: 1.5rem;
+            padding: 10px 20px;
+            margin: 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .tt-suggestion:hover {
+            background-color: #f2f2f2;
+        }
     </style>
 </head>
 
@@ -338,8 +362,10 @@
                 <h1 style="font-size: 2.1rem; margin:0; font-weight: 300;">Edit task</h1>
             </div>
             <div class="col l2 s12 right-align">
-                <a class="btn-flat tooltipped" onclick="$('.expand').addClass('active'); $('.collapsible-header').addClass('active'); $('.collapsible-body').show()" data-position="bottom" data-delay="50" data-tooltip="Expand All"><i class="material-icons">add</i></a>
-                <a class="btn-flat tooltipped" onclick="$('.expand').removeClass('active'); $('.collapsible-header').removeClass('active'); $('.collapsible-body').hide()" data-position="bottom" data-delay="50" data-tooltip="Collapse All"><i class="material-icons">remove</i></a>
+                <a class="btn-flat tooltipped" onclick="$('.expand').addClass('active'); $('.collapsible-header').addClass('active'); $('.collapsible-body').show()"
+                    data-position="bottom" data-delay="50" data-tooltip="Expand All"><i class="material-icons">add</i></a>
+                <a class="btn-flat tooltipped" onclick="$('.expand').removeClass('active'); $('.collapsible-header').removeClass('active'); $('.collapsible-body').hide()"
+                    data-position="bottom" data-delay="50" data-tooltip="Collapse All"><i class="material-icons">remove</i></a>
             </div>
         </div>
     </div>
@@ -548,8 +574,13 @@
                 <a class="btn-floating btn-large waves-effect waves-light deep-purple darken-1 tooltipped" data-position="right" data-delay="50"
                     data-tooltip="Add Flow"><i class="material-icons">add</i></a>
             </div>
-
+            <div class="row">
+                <div class="input-field col s6 offset-s3">
+                    <input id="new-task-item" class="typeahead col s12" type="text">
+                </div>
+            </div>
         </div>
+
     </div>
 
 
@@ -591,10 +622,67 @@
     <script src="lib/js/materialize.js"></script>
     <script src="lib/plotly.js"></script>
     <script src="lib/ace.js"></script>
+    <script src="lib/typeahead.bundle.js"></script>
 
     <script>
         $(".button-collapse").sideNav();
         $('select').material_select();
+        
+        var substringMatcher = function(strs) {
+            return function findMatches(q, cb) {
+                var matches, substringRegex;
+
+                // an array that will be populated with substring matches
+                matches = [];
+
+                // regex used to determine if a string contains the substring `q`
+                substrRegex = new RegExp(q, 'i');
+
+                // iterate through the pool of strings and for any string that
+                // contains the substring `q`, add it to the `matches` array
+                $.each(strs, function(i, str) {
+                    if (substrRegex.test(str.value)) {
+                        matches.push(str);
+                    }
+                });
+                
+                cb(matches);
+            };
+        };
+        
+        var taskItems = [
+            {
+                value: "SQL Connection",
+                icon: "subject",
+                color: "blue darken-1"
+            },
+            {
+                value: "Recurrence",
+                icon: "alarm",
+                color: "deep-purple darken-1"
+            },
+            {
+                value: "Conditional",
+                icon: "device_hub",
+                color: "amber darken-1"
+            }
+        ];
+
+        $('.typeahead').typeahead(null, {
+            name: 'taskItems',
+            display: 'value',
+            source: substringMatcher(taskItems),
+            templates: {
+                empty: [
+                '<div style=\"padding:5px;\" class="empty-message">',
+                    'No items match',
+                '</div>'
+                ].join('\n'),
+                suggestion: function(data) {
+                    return '<div style=\"padding:5px;\"><div style=\"display:inline-block; text-align:center; width:28px; padding-top:3px; margin-right:5px;\" class=\"' + data.color + '\"><i class=\"material-icons white-text\"> ' + data.icon + '</i></div><div style=\"display:inline-block; \"<strong>' + data.value + '</strong></div>';
+                }
+            }
+        });
     </script>
 
 </body>
